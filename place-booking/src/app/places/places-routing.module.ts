@@ -8,18 +8,6 @@ const routes: Routes = [
     path: '',
     component: PlacesPage
   },
-  // {
-  //   path: 'search',
-  //   loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
-  // },
-  // {
-  //   path: 'discover',
-  //   loadChildren: () => import('./discover/discover.module').then( m => m.DiscoverPageModule)
-  // },
-  // {
-  //   path: 'offer',
-  //   loadChildren: () => import('./offer/offer.module').then( m => m.OfferPageModule)
-  // },
   {
     path: 'offers',
     loadChildren: () => import('./offers/offers.module').then( m => m.OffersPageModule)

@@ -6,19 +6,21 @@ import { Place } from './place.model';
 })
 export class PlacesService {
 
+  // tslint:disable-next-line: variable-name
   private _places: Place[] = [
     new Place (
       'p1',
-      'Nordoy Pinky Palace',
-      'Not your average city trip!',
-      'https://www.israel21c.org/wp-content/uploads/2019/01/UM_TLV241-1168x657.jpg',
-      299.99
+      'Vdara\'s Place',
+      'Clean & stylish 2Bedroom duplex',
+      'https://a0.muscache.com/im/pictures/e110da22-05b1-4423-80a0-d7f2033896a9.jpg?aki_policy=xx_large',
+      85.99,
+      'Lekki Phase 1'
     ),
     new Place(
       'p2',
-      'Manhattan Mansion',
+      'Villa Thirty Three',
       'In the heart of New York',
-      'https://m1.cbhomes.com/p/734/SB19160120/67820f4eC6f0460/pds23tp.jpg',
+      'https://a0.muscache.com/im/pictures/eda5f49a-e792-4b0d-9e71-65359b917d32.jpg?aki_policy=xx_large',
       149.99
     ),
     new Place (

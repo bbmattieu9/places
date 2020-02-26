@@ -13,6 +13,10 @@ export class OffersPage implements OnInit {
 
   constructor(private placesService: PlacesService) { }
 
+  onEdit(offerId: string) {
+    console.log('Editing Item with ID :=>', offerId);
+  }
+
   ngOnInit() {
     this.offers = this.placesService.places;
   }

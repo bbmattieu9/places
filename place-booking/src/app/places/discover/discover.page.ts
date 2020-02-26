@@ -13,9 +13,11 @@ export class DiscoverPage implements OnInit {
 
 
   loadedPlaces: Place[];
+  listedLoadedPlaces: Place[];
 
   ngOnInit() {
     this.loadedPlaces = this.placesService.places;
+    this.listedLoadedPlaces = this.loadedPlaces.slice(1);
   }
 
 }

@@ -17,7 +17,7 @@ export class BookingsPage implements OnInit {
 
   constructor(private bookingsSrv: BookingService) { }
 
-  onCancelBooking(offerId: string, slidingEl: IonItemSliding) { 
+  onCancelBooking(offerId: string, slidingEl: IonItemSliding) {
     slidingEl.close();
     // Cancel booking with offerId
   }

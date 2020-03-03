@@ -10,6 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class CreateBookingComponent implements OnInit {
 
   @Input() selectedPlace: Place;
+  @Input() selectedMode: 'select' | 'random';
 
   constructor(private modalCtrl: ModalController) { }
 

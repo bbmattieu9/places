@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlacesPageRoutingModule } from './places-routing.module';
 
 import { PlacesPage } from './places.page';
+import { TesterPipe } from './tester.pipe';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { PlacesPage } from './places.page';
     IonicModule,
     PlacesPageRoutingModule
   ],
-  declarations: [PlacesPage]
+  declarations: [PlacesPage, TesterPipe]
 })
 export class PlacesPageModule {}

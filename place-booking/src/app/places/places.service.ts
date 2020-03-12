@@ -40,9 +40,9 @@ export class PlacesService {
     ),
     new Place (
       'p4',
-      'Habtoor Palace',
-      'Luxury living at its peak in the heart of Dubai!',
-      'https://lxrhotels3.hilton.com/lxr/wp-content/uploads/2020/06/habtoor-palace-dusk-1920x959-580x742.jpg',
+      'Lekki Havens',
+      'Luxury short stay holiday rental apartments!',
+      'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
       299.99,
       'Banana Island',
       new Date('2020-01-01'),

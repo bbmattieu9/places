@@ -44,6 +44,10 @@ export class CreateBookingComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
+  clickMe() {
+    console.log('Clicked Me!');
+  }
+
   onBookPlace() {
     if (!this.form.valid || !this.datesValid(this.form)) {
       return;

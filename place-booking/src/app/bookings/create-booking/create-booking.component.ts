@@ -49,7 +49,7 @@ export class CreateBookingComponent implements OnInit {
   }
 
   onBookPlace() {
-    if (!this.form.valid || !this.datesValid(this.form)) {
+    if (!this.form.valid || !this.datesValid()) {
       return;
     }
 
@@ -65,9 +65,9 @@ export class CreateBookingComponent implements OnInit {
     );
   }
 
-  datesValid(form: NgForm) {
-    const startDate = new Date(form.value['date-from']);
-    const endDate = new Date(form.value['date-to']);
+  datesValid() {
+    const startDate = new Date(this.form.value['date-from']);
+    const endDate = new Date(this.form.value['date-to']);
     return endDate > startDate;
   }
 }

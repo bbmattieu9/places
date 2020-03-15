@@ -13,14 +13,17 @@ export class CreateBookingComponent implements OnInit {
   @Input() selectedPlace: Place;
   @Input() selectedMode: 'select' | 'random';
   @ViewChild('f', { static: false }) form: NgForm;
+
   startDate: string;
   endDate: string;
 
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
+
     const availableFrom = new Date(this.selectedPlace.availableFrom);
     const availableTo = new Date(this.selectedPlace.availableTo);
+
     if (this.selectedMode === 'random') {
       this.startDate = new Date(
         availableFrom.getTime() +

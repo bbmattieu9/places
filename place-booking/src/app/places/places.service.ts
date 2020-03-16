@@ -77,5 +77,9 @@ export class PlacesService {
     this._places.push(newPlace);
   }
 
+  addMore() {
+    console.log('Something is wrong!');
+  }
+
   constructor(private authService: AuthService ) { }
 }

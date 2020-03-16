@@ -13,17 +13,14 @@ export class CreateBookingComponent implements OnInit {
   @Input() selectedPlace: Place;
   @Input() selectedMode: 'select' | 'random';
   @ViewChild('f', { static: false }) form: NgForm;
-
   startDate: string;
   endDate: string;
 
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-
     const availableFrom = new Date(this.selectedPlace.availableFrom);
     const availableTo = new Date(this.selectedPlace.availableTo);
-
     if (this.selectedMode === 'random') {
       this.startDate = new Date(
         availableFrom.getTime() +
@@ -47,16 +44,14 @@ export class CreateBookingComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  clickMe() {
-    console.log('Clicked Me!');
-  }
-
   onBookPlace() {
-    if (!this.form.valid || !this.datesValid()) {
+    if (!this.form.valid || !this.datesValid) {
       return;
     }
 
-    this.modalCtrl.dismiss({bookingData: {
+    this.modalCtrl.dismiss(
+      {
+        bookingData: {
           firstName: this.form.value['first-name'],
           lastName: this.form.value['last-name'],
           guestNumber: this.form.value['guest-number'],

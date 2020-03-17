@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Place } from './place.model';
-import { AuthService } from '../auth/auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,28 +31,50 @@ export class PlacesService {
       new Date('2020-12-31'),
       'abc'
     ),
-    new Place (
-      'p3',
-      'L\'Amour Tojours',
-      'A romantic place in Paris!',
-      'https://www.frenchtoday.com/assets/2018/10/ampfe-free-french-audiobook-chapter06-785x393.jpg',
-      189.99,
-      'Ikeja GRA',
-      new Date('2020-01-01'),
-      new Date('2020-12-31'),
-      'abc'
-    ),
-    new Place (
-      'p4',
-      'Lekki Havens',
-      'Luxury short stay holiday rental apartments!',
-      'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
-      299.99,
-      'Banana Island',
-      new Date('2020-01-01'),
-      new Date('2020-12-31'),
-      'abc'
-    )
+    // new Place (
+    //   'p3',
+    //   'L\'Amour Tojours',
+    //   'A romantic place in Paris!',
+    //   'https://www.frenchtoday.com/assets/2018/10/ampfe-free-french-audiobook-chapter06-785x393.jpg',
+    //   189.99,
+    //   'Ikeja GRA',
+    //   new Date('2020-01-01'),
+    //   new Date('2020-12-31'),
+    //   'abc'
+    // ),
+    // new Place (
+    //   'p4',
+    //   'Lekki Havens',
+    //   'Luxury short stay holiday rental apartments!',
+    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
+    //   299.99,
+    //   'Banana Island',
+    //   new Date('2020-01-01'),
+    //   new Date('2020-12-31'),
+    //   'abc'
+    // ),
+    // new Place (
+    //   'p4',
+    //   'Lekki Havens',
+    //   'Luxury short stay holiday rental apartments!',
+    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
+    //   299.99,
+    //   'Banana Island',
+    //   new Date('2020-01-01'),
+    //   new Date('2020-12-31'),
+    //   'abc'
+    // ),
+    // new Place (
+    //   'p4',
+    //   'Lekki Havens',
+    //   'Luxury short stay holiday rental apartments!',
+    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
+    //   299.99,
+    //   'Banana Island',
+    //   new Date('2020-01-01'),
+    //   new Date('2020-12-31'),
+    //   'abc'
+    // )
   ];
 
   get places() {
@@ -63,23 +85,20 @@ export class PlacesService {
     return {...this._places.find(p => p.id === id)};
   }
 
-  addPlace(title: string, description: string, imageUrl: string, price: number, dateFrom: Date, dateTo: Date) {
-    const newPlace =  new Place(
-                                Math.random().toString(),
-                                title,
-                                description,
-                                'https://a0.muscache.com/im/pictures/e110da22-05b1-4423-80a0-d7f2033896a9.jpg?aki_policy=xx_large',
-                                price,
-                                dateFrom,
-                                dateTo,
-                                this.authService.userId);
+  addPlace(
+        id: string,
+        title: string,
+        description: string,
+        imageUrl: string,
+        price: number,
+        location: string,
+        dateFrom: Date,
+        dateTo: Date,
+        userId: string ) {
 
+    const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
     this._places.push(newPlace);
   }
 
-  addMore() {
-    console.log('Something is wrong!');
-  }
-
-  constructor(private authService: AuthService ) { }
+  constructor() { }
 }

@@ -46,6 +46,7 @@ export class NewOfferPage implements OnInit {
      if (!this.form.valid) {
       return;
     }
+
     //  this.placesSrv.addPlace(
     //       // Math.random().toString(),
     //       // this.form.value.title,

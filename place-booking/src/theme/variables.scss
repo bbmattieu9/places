@@ -2,7 +2,14 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+
+
+
 :root {
+
+    --ion-font-family: 'Montserrat', sans-serif;
+
   --ion-color-primary: #f72664;
   --ion-color-primary-rgb: 247, 38, 100;
   --ion-color-primary-contrast: #ffffff;
@@ -17,7 +24,7 @@
   --ion-color-secondary-shade: #970c76;
   --ion-color-secondary-tint: #b42692;
 
-  --ion-color-tertiary: #8400ff;
+  --ion-color-tertiary: #762033;
   --ion-color-tertiary-rgb: 132, 0, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
@@ -68,6 +75,10 @@
 
   --ion-toolbar-background: var(--ion-color-primary);
   --ion-toolbar-color: var(--ion-color-primary-contrast);
+
+
+
+  --ion-font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
 }
 
 // ion-button  {

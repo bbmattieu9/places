@@ -42,27 +42,22 @@ export class NewOfferPage implements OnInit {
    }
 
    onCreateOffer() {
-     console.log('You don click Create new Offer!');
      if (!this.form.valid) {
       return;
     }
-
-    //  this.placesSrv.addPlace(
-    //       // Math.random().toString(),
-    //       // this.form.value.title,
-    //       // this.form.value.description,
-    //       // 'https://a0.muscache.com/im/pictures/e110da22-05b1-4423-80a0-d7f2033896a9.jpg?aki_policy=xx_large',
-    //       // +this.form.value.price,
-    //       // 'Lekki',
-    //       // new Date(this.form.value.dateFrom),
-    //       // new Date(this.form.value.dateTo),
-    //       // this.authService.userId
-
-    //       console.log(this.form.value);
-    //  );
-
-     console.log(this.form.value.title);
+     this.placesSrv.addPlace(
+          Math.random().toString(),
+          this.form.value.title,
+          this.form.value.description,
+          `https://a0.muscache.com/im/pictures/641ae589-dc26-4b25-9a5b-fed0f4bb167f.jpg?aki_policy=xx_large`,
+          +this.form.value.price,
+          'Lekki',
+          new Date(this.form.value.dateFrom),
+          new Date(this.form.value.dateTo),
+          this.authService.userId
+     );
      this.form.reset();
+     this.router.navigate(['/places/tabs/offers']);
    }
 
 }

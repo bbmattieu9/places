@@ -11,9 +11,11 @@ export class PlacesService {
   private _places: Place[] = [
     new Place (
       'p1',
-      'Vdara\'s Place',
-      'Clean & stylish 2Bedroom duplex',
-      'https://a0.muscache.com/im/pictures/e110da22-05b1-4423-80a0-d7f2033896a9.jpg?aki_policy=xx_large',
+      'Deluxe 2 bedroom Pool Villa',
+      `Mango Tree Villas is complex of three private villas.
+      The Deluxe 2 bedroom pool villa, also called Villa Godok
+      is our 2 bedroom pool villa, ( master bedroom and twin bedroom) with private pool and garden`,
+      'https://a0.muscache.com/im/pictures/5f2c1378-fd8d-4776-93fd-68d0aae29c02.jpg?aki_policy=xx_large',
       85.99,
       'Lekki Phase 1',
       new Date('2020-01-01'),
@@ -23,25 +25,30 @@ export class PlacesService {
     new Place(
       'p2',
       'Villa Thirty Three',
-      'In the heart of New York',
-      'https://a0.muscache.com/im/pictures/eda5f49a-e792-4b0d-9e71-65359b917d32.jpg?aki_policy=xx_large',
+      `Luxurious private 3bd villa located in the heart of Seminyak. Private swimming pool 2,
+      6×8m; built in kitchen; wi-fi internet; within walking distance to cafes, restaurants,
+      boutiques, SPA, fitness`,
+      'https://a0.muscache.com/im/pictures/66731946/dcd6a0af_original.jpg?aki_policy=x_large',
       149.99,
       'Lekki Phase 2',
       new Date('2020-01-01'),
       new Date('2020-12-31'),
       'abc'
     ),
-    // new Place (
-    //   'p3',
-    //   'L\'Amour Tojours',
-    //   'A romantic place in Paris!',
-    //   'https://www.frenchtoday.com/assets/2018/10/ampfe-free-french-audiobook-chapter06-785x393.jpg',
-    //   189.99,
-    //   'Ikeja GRA',
-    //   new Date('2020-01-01'),
-    //   new Date('2020-12-31'),
-    //   'abc'
-    // ),
+    new Place (
+      'p3',
+      'Kealakekua Bay Bali Cottage',
+      `This hidden jewel is at Kealakekua Bay.
+         Private setting in our lower backyard. Walk to nearby Manini Beach.
+       We are located 4 miles down at the bottom of Napoopoo Rd`,
+      'https://a0.muscache.com/im/pictures/59365499/96d38388_original.jpg?aki_policy=x_large',
+      189.99,
+      'Ikeja GRA',
+      new Date('2020-01-01'),
+      new Date('2020-12-31'),
+      'abc'
+    ),
+
     // new Place (
     //   'p4',
     //   'Lekki Havens',
@@ -86,18 +93,19 @@ export class PlacesService {
   }
 
   addPlace(
-        id: string,
-        title: string,
-        description: string,
-        imageUrl: string,
-        price: number,
-        location: string,
-        dateFrom: Date,
-        dateTo: Date,
-        userId: string ) {
+        id ,
+        title,
+        description,
+        imageUrl,
+        price,
+        location,
+        dateFrom,
+        dateTo,
+        userId) {
 
     const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
     this._places.push(newPlace);
+    console.log(`The value submitted to the addPlace service ${this._places}`);
   }
 
   constructor() { }

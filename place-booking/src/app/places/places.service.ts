@@ -15,7 +15,7 @@ export class PlacesService {
       `Mango Tree Villas is complex of three private villas.
       The Deluxe 2 bedroom pool villa, also called Villa Godok
       is our 2 bedroom pool villa, ( master bedroom and twin bedroom) with private pool and garden`,
-      'https://a0.muscache.com/im/pictures/5f2c1378-fd8d-4776-93fd-68d0aae29c02.jpg?aki_policy=xx_large',
+      'https://a0.muscache.com/im/pictures/59365499/96d38388_original.jpg?aki_policy=x_large',
       85.99,
       'Lekki Phase 1',
       new Date('2020-01-01'),
@@ -41,7 +41,7 @@ export class PlacesService {
       `This hidden jewel is at Kealakekua Bay.
          Private setting in our lower backyard. Walk to nearby Manini Beach.
        We are located 4 miles down at the bottom of Napoopoo Rd`,
-      'https://a0.muscache.com/im/pictures/59365499/96d38388_original.jpg?aki_policy=x_large',
+      'https://a0.muscache.com/im/pictures/641ae589-dc26-4b25-9a5b-fed0f4bb167f.jpg?aki_policy=xx_large',
       189.99,
       'Ikeja GRA',
       new Date('2020-01-01'),

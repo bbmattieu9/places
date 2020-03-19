@@ -60,4 +60,18 @@ export class NewOfferPage implements OnInit {
      this.router.navigate(['/places/tabs/offers']);
    }
 
+   checkValidity() {
+    // import { Component } from '@angular/core';
+
+
+    @Component({
+      selector: 'app-loader-spinner',
+      template: `<div class="loadingio-spinner-spinner-ivirlj5b47q"><div class="ldio-prqj8up7s0g">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      </div></div>`,
+      styleUrls: ['./loader-spinner.component.scss']
+    });
+    // export class LoaderSpinnerComponent {}
+   }
+
 }

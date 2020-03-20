@@ -91,7 +91,9 @@ export class PlacesService {
         userId) {
 
     const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
-    return this.places.pipe(take(1), delay(1000), tap( places => {
+    return this.places.pipe(take(1),
+            delay(1000),
+            tap( places => {
       this._places.next(places.concat(newPlace));
     }));
   }

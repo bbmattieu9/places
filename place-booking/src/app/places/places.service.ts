@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+
 import { Place } from './place.model';
+
 
 
 @Injectable({
@@ -8,7 +13,7 @@ import { Place } from './place.model';
 export class PlacesService {
 
   // tslint:disable-next-line: variable-name
-  private _places: Place[] = [
+  private _places = new BehaviorSubject<Place[]>([
     new Place (
       'p1',
       'Deluxe 2 bedroom Pool Villa',
@@ -48,44 +53,21 @@ export class PlacesService {
       new Date('2020-12-31'),
       'abc'
     ),
-
-    // new Place (
-    //   'p4',
-    //   'Lekki Havens',
-    //   'Luxury short stay holiday rental apartments!',
-    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
-    //   299.99,
-    //   'Banana Island',
-    //   new Date('2020-01-01'),
-    //   new Date('2020-12-31'),
-    //   'abc'
-    // ),
-    // new Place (
-    //   'p4',
-    //   'Lekki Havens',
-    //   'Luxury short stay holiday rental apartments!',
-    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
-    //   299.99,
-    //   'Banana Island',
-    //   new Date('2020-01-01'),
-    //   new Date('2020-12-31'),
-    //   'abc'
-    // ),
-    // new Place (
-    //   'p4',
-    //   'Lekki Havens',
-    //   'Luxury short stay holiday rental apartments!',
-    //   'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
-    //   299.99,
-    //   'Banana Island',
-    //   new Date('2020-01-01'),
-    //   new Date('2020-12-31'),
-    //   'abc'
-    // )
-  ];
+    new Place (
+      'p4',
+      'Lekki Havens',
+      'Luxury short stay holiday rental apartments!',
+      'https://static.wixstatic.com/media/dfa751_6c177596ff9b4f758fd9f09cfbb65653~mv2.jpg',
+      299.99,
+      'Banana Island',
+      new Date('2020-01-01'),
+      new Date('2020-12-31'),
+      'abc'
+    )
+  ]);
 
   get places() {
-    return [...this._places];
+    return this._places.asObservable();
   }
 
   getPlaceById(id: string) {
@@ -104,8 +86,9 @@ export class PlacesService {
         userId) {
 
     const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
-    this._places.push(newPlace);
-    console.log(`The value submitted to the addPlace service ${this._places}`);
+    this.places.pipe(take(1)).subscribe(places => {
+      this._places.next(places.concat(newPlace));
+    });
   }
 
   constructor() { }

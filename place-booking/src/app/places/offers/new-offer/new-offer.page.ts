@@ -1,22 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlacesService } from '../../places.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Place } from '../../place.model';
+import { Subscribable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-offer',
   templateUrl: './new-offer.page.html',
   styleUrls: ['./new-offer.page.scss'],
 })
-export class NewOfferPage implements OnInit {
+export class NewOfferPage implements OnInit, OnDestroy {
   form: FormGroup;
+  offers: Place[];
+  placeSub: Subscription;
 
   constructor(private placesSrv: PlacesService,
               private router: Router,
               private authService: AuthService ) { }
 
    ngOnInit() {
+
+    this.placeSub = this.placesSrv.places.subscribe(places => {
+      this.offers = places;
+    });
+
     this.form = new FormGroup({
       title: new FormControl(null, {
       updateOn: 'blur',
@@ -60,5 +69,10 @@ export class NewOfferPage implements OnInit {
      this.router.navigate(['/places/tabs/offers']);
    }
 
+   ngOnDestroy() {
+     if (this.placeSub) {
+      this.placeSub.unsubscribe();
+     }
+  }
 
 }

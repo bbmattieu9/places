@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Place } from '../../place.model';
 import { Subscribable, Subscription } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-new-offer',
@@ -18,7 +19,8 @@ export class NewOfferPage implements OnInit, OnDestroy {
 
   constructor(private placesSrv: PlacesService,
               private router: Router,
-              private authService: AuthService ) { }
+              private authService: AuthService,
+              private loadingCtrl: LoadingController ) { }
 
    ngOnInit() {
 
@@ -54,7 +56,11 @@ export class NewOfferPage implements OnInit, OnDestroy {
      if (!this.form.valid) {
       return;
     }
-     this.placesSrv.addPlace(
+     this.loadingCtrl.create({
+      message: 'creating place...'
+    }).then(loadingEl => {
+      loadingEl.present();
+      this.placesSrv.addPlace(
           Math.random().toString(),
           this.form.value.title,
           this.form.value.description,
@@ -64,9 +70,12 @@ export class NewOfferPage implements OnInit, OnDestroy {
           new Date(this.form.value.dateFrom),
           new Date(this.form.value.dateTo),
           this.authService.userId
-     );
-     this.form.reset();
-     this.router.navigate(['/places/tabs/offers']);
+     ).subscribe(() => {
+       loadingEl.dismiss();
+       this.form.reset();
+       this.router.navigate(['/places/tabs/offers']);
+     });
+    });
    }
 
    ngOnDestroy() {

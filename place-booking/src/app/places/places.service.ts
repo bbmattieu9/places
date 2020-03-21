@@ -98,5 +98,28 @@ export class PlacesService {
     }));
   }
 
+  updatePlace(placeId: string, title: string, description: string) {
+    return this.places.pipe(take(1), // return all the places record asObservable
+                            delay(1000), // delay it for a sec for spinner to load
+                                  tap(places => { // tap into the returned bigObject and filter out
+                                                  // using the Index of the 'wanted' record
+            const updatePlaceIndex = places.findIndex(pl => pl.id === placeId);
+            const allPlacesArr = [...places];
+            const placeToUpdate = allPlacesArr[updatePlaceIndex];
+            allPlacesArr[updatePlaceIndex] = new Place(
+              placeToUpdate.id,
+              title,
+              description,
+              placeToUpdate.imageUrl,
+              placeToUpdate.price,
+              placeToUpdate.location,
+              placeToUpdate.availableFrom,
+              placeToUpdate.availableTo,
+              placeToUpdate.userId
+            );
+            this._places.next(allPlacesArr);
+    }));
+  }
+
   constructor() { }
 }

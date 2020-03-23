@@ -48,7 +48,7 @@
           </ion-col>
       </ion-row>
        
-      <ion-row>
+      <ion-row *ngIf="isBookable">
         <ion-col size-sm="6" offset-sm="3"> 
           <ion-button color="primary" class="ion-margin" (click)="onBookPlace()" expand="block">Book Place</ion-button>
         </ion-col>

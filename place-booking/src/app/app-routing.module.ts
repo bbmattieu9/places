@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'bookings',
     loadChildren: () => import('./bookings/bookings.module').then( m => m.BookingsPageModule),
     canLoad: [AuthGuard]
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   }
 ];
 

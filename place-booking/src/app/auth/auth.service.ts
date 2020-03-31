@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,15 @@ export class AuthService {
     return this._userIsAuthenticated;
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   login() {
     this._userIsAuthenticated = true;
   }
+
+  createNewUser(email: string, password: string) {
+    // this.http.post(`String that goes in to the server as parameters`)
+   }
 
   logout() {
     this._userIsAuthenticated = false;

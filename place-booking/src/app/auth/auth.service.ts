@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class AuthService {
     return this._userIsAuthenticated;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   login() {
     this._userIsAuthenticated = true;

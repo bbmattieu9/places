@@ -122,5 +122,17 @@ export class PlacesService {
     }));
   }
 
+  deletePlaceById(placeId: string) {
+    return this.places.pipe(take(1), // return all the places record asObservable
+                            delay(1000), // delay it for a sec for spinner to load
+                                  tap(places => { // tap into the returned bigObject and filter out the place
+                                                  // you wish to update
+                                                  // using the Index of the 'wanted' record
+            const placeToDelete = placeId;
+            const placesAfterDeleteOne = places.filter(aPlace => aPlace !== placeToDelete);
+            this._places.next(placesAfterDeleteOne);
+    }));
+  }
+
   constructor() { }
 }

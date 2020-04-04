@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take, map, tap, delay } from 'rxjs/operators';
 
 
@@ -11,6 +11,10 @@ import { Place } from './place.model';
   providedIn: 'root'
 })
 export class PlacesService {
+
+  places$: Observable<Place[]>;
+
+  // places$ = places;
 
   // tslint:disable-next-line: variable-name
   private _places = new BehaviorSubject<Place[]>([

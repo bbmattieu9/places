@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: 'reserved-place',
+    loadChildren: () => import('./reserved-place/reserved-place.module').then( m => m.ReservedPlacePageModule)
   }
 ];
 

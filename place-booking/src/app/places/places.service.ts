@@ -1,9 +1,16 @@
+// Angular libraries and packages
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+
+// RxJs
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, map, tap, delay } from 'rxjs/operators';
 
-
+// local imports
 import { Place } from './place.model';
+import { AuthService } from '../auth/auth.service';
+
 
 
 
@@ -12,9 +19,10 @@ import { Place } from './place.model';
 })
 export class PlacesService {
 
-  places$: Observable<Place[]>;
+  constructor(private authService: AuthService,
+              private http: HttpClient) { }
 
-  // places$ = places;
+  places$: Observable<Place[]>;
 
   // tslint:disable-next-line: variable-name
   private _places = new BehaviorSubject<Place[]>([
@@ -79,7 +87,7 @@ export class PlacesService {
       take(1),
       map(places => {
         return {...places.find(p => p.id === id)};
-      })
+      }),
     );
   }
 
@@ -94,7 +102,7 @@ export class PlacesService {
         dateTo,
         userId) {
 
-    const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
+    const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, this.authService.userId);
     return this.places.pipe(take(1),
             delay(1000),
             tap( places => {
@@ -127,7 +135,7 @@ export class PlacesService {
   }
 
   deletePlaceById(placeId: string) {
-    return this.places.pipe(take(1), // return all the places record asObservable
+    return this.places.pipe(take(1), // return all the places record asObservable but take (1)
                             delay(1000), // delay it for a sec for spinner to load
                                   tap(places => { // tap into the returned bigObject and filter out the place
                                                   // you wish to update
@@ -138,5 +146,4 @@ export class PlacesService {
     }));
   }
 
-  constructor() { }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -10,7 +11,9 @@ import { LoadingController } from '@ionic/angular';
 })
 export class AuthPage implements OnInit {
 
+  signInForm: FormGroup;
   isLoading = false;
+  isLogin = true;
 
   constructor(private authSrv: AuthService,
               private router: Router,
@@ -31,7 +34,39 @@ export class AuthPage implements OnInit {
   });
   }
 
+  onSwitchMode() {
+    this.isLogin = !this.isLogin;
+  }
+
+  onSubmit() {
+    if (!this.signInForm.valid) { 
+
+      // construct form object
+      const email = this.signInForm.get('email').value;
+      const password = this.signInForm.get('password').value;
+
+      if (this.isLogin) {
+        // Send req to login servers
+      } else {
+        // Send the req to signup servers
+      }
+
+    }
+  }
+
   ngOnInit() {
+
+
+    this.signInForm = new FormGroup({
+      email: new FormControl(null, {
+      updateOn: 'blur',
+      validators: [Validators.required]
+      }),
+      password: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required, Validators.min(6)]
+      })
+    });
   }
 
 }

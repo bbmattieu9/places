@@ -103,11 +103,14 @@ export class PlacesService {
         userId) {
 
     const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, this.authService.userId);
-    return this.places.pipe(take(1),
-            delay(1000),
-            tap( places => {
-      this._places.next(places.concat(newPlace));
-    }));
+    this.http.post('https://ionic5-airbnbapp.firebaseio.com/offered-places.json', { ...newPlace, id: null}).pipe(
+      tap(responseData => { console.log(responseData); })
+    );
+    // return this.places.pipe(take(1),
+    //         delay(1000),
+    //         tap( places => {
+    //   this._places.next(places.concat(newPlace));
+    // }));
   }
 
   updatePlace(placeId: string, title: string, description: string) {

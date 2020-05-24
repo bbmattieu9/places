@@ -39,7 +39,7 @@ export class AuthPage implements OnInit {
   }
 
   onSubmit() {
-    if (!this.signInForm.valid) { 
+    if (!this.signInForm.valid) {
 
       // construct form object
       const email = this.signInForm.get('email').value;

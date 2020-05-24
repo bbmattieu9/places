@@ -50,7 +50,7 @@
                 (click)='onSwitchMode()'>
             Switch to {{ isLogin  ? 'SignUp' : 'Login'}}
           </ion-button>
-          <ion-button type="sunbmit" color="primary" expand="block">
+          <ion-button type="submit" (click)="onLogin()" color="primary" expand="block">
             Login
           </ion-button>
         </ion-col>

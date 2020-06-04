@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 // RxJs
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take, map, tap, delay } from 'rxjs/operators';
+import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 
 // local imports
 import { Place } from './place.model';
@@ -101,11 +101,21 @@ export class PlacesService {
         dateFrom,
         dateTo,
         userId) {
-
-    const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, this.authService.userId);
-    this.http.post('https://ionic5-airbnbapp.firebaseio.com/offered-places.json', { ...newPlace, id: null}).pipe(
-      tap(responseData => { console.log(responseData); })
+          let generatedId: string;
+          const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, this.authService.userId);
+          return this.http.post<{name: string}>('https://ionic5-airbnbapp.firebaseio.com/offered-places.json',
+          { ...newPlace, id: null}).pipe(
+      switchMap(resData => {
+        generatedId = resData.name;
+        return this.places;
+      }),
+      take(1),
+      tap(places => {
+        newPlace.id = generatedId;
+        this._places.next(places.concat(newPlace));
+      })
     );
+
     // return this.places.pipe(take(1),
     //         delay(1000),
     //         tap( places => {

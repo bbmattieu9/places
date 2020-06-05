@@ -91,6 +91,14 @@ export class PlacesService {
     );
   }
 
+  fetchPlaces() {
+    return this.http.get('https://ionic5-airbnbapp.firebaseio.com/offered-places.json').pipe(
+      tap(resData => {
+        console.log(resData);
+      })
+    );
+  }
+
   addPlace(
         id ,
         title,
@@ -115,12 +123,6 @@ export class PlacesService {
         this._places.next(places.concat(newPlace));
       })
     );
-
-    // return this.places.pipe(take(1),
-    //         delay(1000),
-    //         tap( places => {
-    //   this._places.next(places.concat(newPlace));
-    // }));
   }
 
   updatePlace(placeId: string, title: string, description: string) {

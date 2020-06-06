@@ -9,12 +9,13 @@ import { Place } from '../../place.model';
 export class OfferItemComponent implements OnInit {
   @Input() offer: Place;
 
+
   constructor() { }
 
   getDummyDate() {
     return new Date();
   }
 
-  ngOnInit() {}
+  ngOnInit() { console.log('Offers: ', this.offer); }
 
 }

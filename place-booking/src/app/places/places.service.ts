@@ -13,6 +13,7 @@ import { AuthService } from '../auth/auth.service';
 
 
 interface PlaceData {
+  id: string;
   availableFrom: Date;
   availableTo: Date;
   description: string;
@@ -52,7 +53,7 @@ export class PlacesService {
   fetchPlaces() {
     return this.http.get('https://ionic5-airbnbapp.firebaseio.com/offered-places.json').pipe(
       map(resData => {
-        console.log(resData);
+        console.log('Finding missing Data?', resData);
         const places = [];
         for (const key in resData) {
           if (resData.hasOwnProperty(key)) {
@@ -63,9 +64,10 @@ export class PlacesService {
                 resData[key].description,
                 resData[key].imageUrl,
                 resData[key].price,
+                resData[key].location,
                 resData[key].availableFrom,
                 resData[key].availableTo,
-                // resData[key].userId
+                resData[key].userId
               )
             );
           }
@@ -73,6 +75,7 @@ export class PlacesService {
         return places;
       }),
       tap(places => {
+        // console.log('Here are the places: ', places);
         this._places.next(places);
       })
     );
@@ -86,7 +89,8 @@ export class PlacesService {
         price,
         location,
         dateFrom,
-        dateTo, userId) {
+        dateTo,
+        userId) {
           let generatedId: string;
           const newPlace = new Place(id, title, description, imageUrl, price, location, dateFrom, dateTo, userId);
           return this.http.post<{name: string}>('https://ionic5-airbnbapp.firebaseio.com/offered-places.json',

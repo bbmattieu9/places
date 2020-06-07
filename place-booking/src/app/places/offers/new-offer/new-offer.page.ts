@@ -4,7 +4,7 @@ import { PlacesService } from '../../places.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Place } from '../../place.model';
-import { Subscribable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 
 @Component({

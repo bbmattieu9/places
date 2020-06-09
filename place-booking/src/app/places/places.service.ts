@@ -75,7 +75,6 @@ export class PlacesService {
         return places;
       }),
       tap(places => {
-        // console.log('Here are the places: ', places);
         this._places.next(places);
       })
     );
@@ -108,15 +107,14 @@ export class PlacesService {
   }
 
   updatePlace(placeId: string, title: string, description: string) {
-    return this.places.pipe(take(1), // return all the places record asObservable
-                            delay(1000), // delay it for a sec for spinner to load
-                                  tap(places => { // tap into the returned bigObject and filter out the place
-                                                  // you wish to update
-                                                  // using the Index of the 'wanted' record
-            const updatePlaceIndex = places.findIndex(pl => pl.id === placeId);
-            const allPlacesArr = [...places];
-            const placeToUpdate = allPlacesArr[updatePlaceIndex];
-            allPlacesArr[updatePlaceIndex] = new Place(
+    let allPlacesArr: Place[];
+    return this.places.pipe(
+      take(1),
+      switchMap(arrOfplaces => {
+      const updatePlaceIndex = arrOfplaces.findIndex(pl => pl.id === placeId);
+      allPlacesArr = [...arrOfplaces];
+      const placeToUpdate = allPlacesArr[updatePlaceIndex];
+      allPlacesArr[updatePlaceIndex] = new Place(
               placeToUpdate.id,
               title,
               description,
@@ -127,8 +125,13 @@ export class PlacesService {
               placeToUpdate.availableTo,
               placeToUpdate.userId
             );
-            this._places.next(allPlacesArr);
-    }));
+      return this.http.put(`https://ionic5-airbnbapp.firebaseio.com/offered-places/${placeId}.json`,
+            {...allPlacesArr[updatePlaceIndex], id: null});
+    }),
+    tap(() => {
+      this._places.next(allPlacesArr);
+    })
+    );
   }
 
   deletePlaceById(placeId: string) {

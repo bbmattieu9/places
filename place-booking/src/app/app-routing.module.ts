@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: 'google-map',
+    loadChildren: () => import('./google-map/google-map.module').then( m => m.GoogleMapPageModule)
   }
 ];
 

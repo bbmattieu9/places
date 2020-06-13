@@ -41,12 +41,21 @@ export class PlacesService {
     return this._places.asObservable();
   }
 
-  getPlaceById(id: string) {
-    return this.places.pipe(
-      take(1),
-      map(places => {
-        return {...places.find(p => p.id === id)};
-      }),
+  getPlaceById(placeId: string) {
+    return this.http.get<PlaceData>(`https://ionic5-airbnbapp.firebaseio.com/offered-places/${placeId}.json`).pipe(
+     map((placeData) => {
+       return new Place(
+         placeId,
+         placeData.title,
+         placeData.description,
+         placeData.availableFrom,
+         placeData.availableTo,
+         placeData.imageUrl,
+         placeData.location,
+         placeData.price,
+         placeData.userId
+            )
+     })
     );
   }
 

@@ -14,8 +14,8 @@ import { AuthService } from '../auth/auth.service';
 
 interface PlaceData {
   id: string;
-  availableFrom: Date;
-  availableTo: Date;
+  availableFrom: any;
+  availableTo: any;
   description: string;
   imageUrl: string;
   location: string;
@@ -33,6 +33,7 @@ export class PlacesService {
               private http: HttpClient) { }
 
   places$: Observable<Place[]>;
+  placeData: any;
 
   // tslint:disable-next-line: variable-name
   private _places = new BehaviorSubject<Place[]>([]);
@@ -43,18 +44,20 @@ export class PlacesService {
 
   getPlaceById(placeId: string) {
     return this.http.get<PlaceData>(`https://ionic5-airbnbapp.firebaseio.com/offered-places/${placeId}.json`).pipe(
-     map((placeData) => {
+     map(placeData => {
+       console.log('Here is place data: ', placeData);
+       this.placeData = placeData;
        return new Place(
          placeId,
-         placeData.title,
-         placeData.description,
-         placeData.availableFrom,
-         placeData.availableTo,
-         placeData.imageUrl,
+         this.placeData.title,
+         this.placeData.description,
+         this.placeData.imageUrl,
+         this.placeData.price,
          placeData.location,
-         placeData.price,
-         placeData.userId
-            )
+         this.placeData.availableFrom,
+         this.placeData.availableTo,
+         this.placeData.userId
+        );
      })
     );
   }
@@ -62,7 +65,7 @@ export class PlacesService {
   fetchPlaces() {
     return this.http.get('https://ionic5-airbnbapp.firebaseio.com/offered-places.json').pipe(
       map(resData => {
-        console.log('Finding missing Data?', resData);
+        // console.log('Finding missing Data?', resData);
         const places = [];
         for (const key in resData) {
           if (resData.hasOwnProperty(key)) {

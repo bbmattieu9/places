@@ -16,6 +16,8 @@ export class EditOfferPage implements OnInit, OnDestroy {
   place: Place;
   private placeSub: Subscription;
   editNewOfferform: FormGroup;
+  isLoading = false;
+  placeId: string;
 
   constructor(private route: ActivatedRoute,
               private navCtrl: NavController,
@@ -48,6 +50,9 @@ export class EditOfferPage implements OnInit, OnDestroy {
       if (!paramMap.has('placeId')) {
         return this.navCtrl.navigateBack('places/tabs/offers');
       }
+
+      this.placeId = paramMap.get('placeId');
+      this.isLoading = true;
       this.placeSub = this.placesSrv.getPlaceById(paramMap.get('placeId')).subscribe(singlePlace => {
         this.place = singlePlace;
         this.editNewOfferform = new FormGroup({
@@ -60,6 +65,7 @@ export class EditOfferPage implements OnInit, OnDestroy {
             validators: [Validators.required, Validators.maxLength(500)]
           })
         });
+        this.isLoading = false;
       });
     });
   }

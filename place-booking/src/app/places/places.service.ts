@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 // RxJs
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { take, map, tap, delay, switchMap } from 'rxjs/operators';
 
 // local imports
@@ -123,6 +123,13 @@ export class PlacesService {
     return this.places.pipe(
       take(1),
       switchMap(arrOfplaces => {
+      if (!arrOfplaces || arrOfplaces.length <= 0) {
+          return this.fetchPlaces();
+         } else {
+           return of(arrOfplaces);
+         }
+    }),
+    switchMap(arrOfplaces => {
       const updatePlaceIndex = arrOfplaces.findIndex(pl => pl.id === placeId);
       allPlacesArr = [...arrOfplaces];
       const placeToUpdate = allPlacesArr[updatePlaceIndex];
